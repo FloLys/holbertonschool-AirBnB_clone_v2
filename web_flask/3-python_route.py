@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Flask Introduction """
 from flask import Flask
+from flask import redirect, request
 app = Flask(__name__)
 
 
@@ -21,6 +22,17 @@ def c_is_whatever(text):
     """ Prints custom text when entering the route """
     text = text.replace('_', ' ')
     return "C {}".format(text)
+
+
+@app.route("/python/", strict_slashes=False)
+@app.route("/python/<text>", strict_slashes=False)
+def python_is_whatever(text="is cool"):
+    """ Prints custom text when entering the route """
+#    if not text:
+#        text = "is cool"
+#    else:
+    text = text.replace('_', ' ')
+    return "Python {}".format(text)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
